@@ -1,7 +1,7 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '46 12 * * *'
+    - cron:  '48 12 * * *'
 
 jobs:
   checkout:
@@ -16,8 +16,8 @@ jobs:
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
     - run: python update-docs.py
   commit:
+    runs-on: ubuntu-latest
     steps:
-      runs-on: ubuntu-latest
       - name: Commit files
         run: |
           git config --local user.email "${{ secrets.USER_EMAIL }}"
