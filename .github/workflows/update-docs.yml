@@ -1,7 +1,8 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '31 15 * * *'
+    - cron:  '35 15 * * *'
+  create:
 
 jobs:
   collate:
@@ -19,8 +20,6 @@ jobs:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         pwd
-        ls -al
-        cd sandbox
         python update-docs.py
     - name: Commit files
       run: |
