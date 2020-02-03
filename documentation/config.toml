@@ -1,0 +1,32 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Terraform Index"
+theme = "techdoc"
+
+[Params]
+
+  custom_background_color = "#002c3e"
+
+  # Documentation Menu section
+  # Menu style settings
+  menu_style = "open-menu" # "open-menu" or "slide-menu"
+
+  # Date format
+  dateformat = "" # default "2 Jan 2006"
+  # See the format reference https://gohugo.io/functions/format/#hugo-date-and-time-templating-reference
+
+  # path name excluded from documentation menu
+  menu_exclusion = [
+      "archives",
+      "archive",
+      "blog",
+      "entry",
+      "post",
+      "posts"
+  ]
+
+  # Global menu section
+  [[menu.main]]
+  name = "Docs"
+  url = "/docs"
+  weight = 1
