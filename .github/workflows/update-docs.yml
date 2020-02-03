@@ -1,7 +1,7 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '55 12 * * *'
+    - cron:  '41 14 * * *'
 
 jobs:
   checkout:
@@ -15,12 +15,17 @@ jobs:
       with:
         python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-    - run: python update-docs.py
+    - run: |
+        cd sandbox
+        python update-docs.py
+    - env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   commit:
     runs-on: ubuntu-latest
     steps:
       - name: Commit files
         run: |
+          cd sandbox
           git config --local user.email "${{ secrets.USER_EMAIL }}"
           git config --local user.name "${{ secrets.USER_NAME }}"
           git commit -m "Update documentation" -a

@@ -7,16 +7,14 @@ import github3
 APP = "documentation/content/application"
 COMMON = "documentation/content/application"
 MAIN_BRANCH = 'master'
-user = os.environ['GITHUB_USER']
+user = os.environ['GITHUB_REPOSITORY'].split('/')[0]
+token = os.environ['GITHUB_TOKEN']
 repos = ['test1', 'test2']
 
-token = id = ''
-# run get-creds.py first
-with open('ghcreds', 'r') as fd:
-    token = fd.readline().strip()
-    id = fd.readline().strip()
-
 github = github3.login(token=token)
+# org = github3.organization(name)
+# repos = org.repositories()
+# owner = repos[i].owner()
 for repo_name in repos:
     readme_path = APP + "/aws/" + repo_name + "/README.md"
     repo_dir = os.path.dirname(readme_path)
