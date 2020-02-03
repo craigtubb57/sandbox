@@ -1,25 +1,30 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '16 15 * * *'
+    - cron:  '16 29 * * *'
 
 jobs:
   collate:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v1
       with:
         python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-    - env:
+    - name: Update docs
+      env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
+        pwd
+        ls -al
         cd sandbox
         python update-docs.py
     - name: Commit files
       run: |
-        cd sandbox
+        pwd
         git config --local user.email "${{ secrets.USER_EMAIL }}"
         git config --local user.name "${{ secrets.USER_NAME }}"
         git commit -m "Update documentation" -a
