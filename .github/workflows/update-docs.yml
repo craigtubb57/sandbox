@@ -9,6 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
   getdocs:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-python@v1
       with:
