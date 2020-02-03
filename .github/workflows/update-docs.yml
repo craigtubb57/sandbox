@@ -1,7 +1,7 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '43 16 * * *'
+    - cron:  '56 16 * * *'
   create:
 
 jobs:
@@ -27,12 +27,12 @@ jobs:
         pwd
         python update-docs.py
     - name: Commit files
-      if: success()
+      if: echo git diff != ''
       run: |
         pwd
         git config --local user.email "${{ secrets.USER_EMAIL }}"
         git config --local user.name "${{ secrets.USER_NAME }}"
         git commit -m "Update documentation" -a
     - name: Push changes
-      if: success()
+      if: echo git diff != ''
       uses: ad-m/github-push-action@master
