@@ -1,7 +1,7 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '48 12 * * *'
+    - cron:  '55 12 * * *'
 
 jobs:
   checkout:
