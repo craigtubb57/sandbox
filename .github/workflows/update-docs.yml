@@ -1,3 +1,8 @@
+name: Collate Documentation
+on:
+  schedule:
+    - cron: '0 7 * * *'
+
 jobs:
   checkout:
     runs-on: ubuntu-latest
@@ -14,8 +19,8 @@ jobs:
     steps:
       - name: Commit files
         run: |
-          git config --local user.email "craig.tubb.57@gmail.com"
-          git config --local user.name "Craig Tubb"
+          git config --local user.email "${{ secrets.USER_EMAIL }}"
+          git config --local user.name "${{ secrets.USER_NAME }}"
           git commit -m "Update documentation" -a
       - name: Push changes
         uses: ad-m/github-push-action@master

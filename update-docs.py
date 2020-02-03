@@ -28,4 +28,19 @@ for repo_name in repos:
         base64_bytes = repo_readme.content.encode('ascii')
         readme_bytes = base64.b64decode(base64_bytes)
         readme = readme_bytes.decode('ascii')
+        title_i = readme.find('# ') + 2
+        title_end_i = readme.find('\n', title_i)
+        title_end_i = title_end_i if title_end_i != -1 else len(readme)
+        print("{}: {}".format("TITLE INDEX", title_i))
+        print("{}: {}".format("TITLE END INDEX", title_end_i))
+        title = readme[title_i:title_end_i]
+        front_title = "\ntitle: \"" + title + "\""
+        front_url = "\nurl: \"" + repo_name + "\""
+        front_matter = [
+            "---",
+            front_title,
+            front_url,
+            "\n---"
+        ]
+        readme = "".join(front_matter) + readme[title_end_i:len(readme)]
         f.write(readme.encode('utf-8'))
