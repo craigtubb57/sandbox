@@ -1,7 +1,7 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '12 15 * * *'
+    - cron:  '16 15 * * *'
 
 jobs:
   collate:
@@ -17,11 +17,11 @@ jobs:
       run: |
         cd sandbox
         python update-docs.py
-      - name: Commit files
-        run: |
-          cd sandbox
-          git config --local user.email "${{ secrets.USER_EMAIL }}"
-          git config --local user.name "${{ secrets.USER_NAME }}"
-          git commit -m "Update documentation" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+    - name: Commit files
+      run: |
+        cd sandbox
+        git config --local user.email "${{ secrets.USER_EMAIL }}"
+        git config --local user.name "${{ secrets.USER_NAME }}"
+        git commit -m "Update documentation" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
