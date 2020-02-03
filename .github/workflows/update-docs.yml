@@ -22,15 +22,17 @@ jobs:
         pip install github3.py
     - name: Update docs
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }} # custom token needed as default GITHUB_TOKEN permissions are limited to the repo containing the workflow action
       run: |
         pwd
         python update-docs.py
     - name: Commit files
+      if: success()
       run: |
         pwd
         git config --local user.email "${{ secrets.USER_EMAIL }}"
         git config --local user.name "${{ secrets.USER_NAME }}"
         git commit -m "Update documentation" -a
     - name: Push changes
+      if: success()
       uses: ad-m/github-push-action@master
