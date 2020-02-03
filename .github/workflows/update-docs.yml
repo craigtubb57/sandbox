@@ -1,16 +1,13 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '57 14 * * *'
+    - cron:  '12 15 * * *'
 
 jobs:
-  checkout:
+  collate:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-  getdocs:
-    runs-on: ubuntu-latest
-    steps:
     - uses: actions/setup-python@v1
       with:
         python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
@@ -20,9 +17,6 @@ jobs:
       run: |
         cd sandbox
         python update-docs.py
-  commit:
-    runs-on: ubuntu-latest
-    steps:
       - name: Commit files
         run: |
           cd sandbox
