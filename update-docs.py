@@ -8,7 +8,7 @@ APP = "documentation/content/application"
 COMMON = "documentation/content/application"
 MAIN_BRANCH = 'master'
 user = os.environ['GITHUB_REPOSITORY'].split('/')[0]
-token = os.environ['GITHUB_TOKEN']
+token = os.environ['GH_TOKEN']
 repos = ['test1', 'test2']
 
 github = github3.login(token=token)
