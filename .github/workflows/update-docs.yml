@@ -1,7 +1,7 @@
 name: Collate Documentation
 on:
   schedule:
-    - cron:  '20 09 * * *'
+    - cron:  '37 9 * * *'
   create:
 
 jobs:
@@ -32,14 +32,14 @@ jobs:
       run: |
         unset HAS_DIFF
         if [ "echo git diff" == "" ]; then HAS_DIFF='true' ; fi
-        echo ::set-output name=HAS_DIFF::${HAS_DIFF}
+        echo ::set-env name=HAS_DIFF::${HAS_DIFF}
     - name: Commit files
-      if: ${{ steps.diff.outputs.HAS_DIFF }}
+      if: env.HAS_DIFF == 'true'
       run: |
         pwd
         git config --local user.email "${{ secrets.USER_EMAIL }}"
         git config --local user.name "${{ secrets.USER_NAME }}"
         git commit -m "Update documentation" -a
     - name: Push changes
-      if: ${{ steps.diff.outputs.HAS_DIFF }}
+      if: env.HAS_DIFF == 'true'
       uses: ad-m/github-push-action@master
